@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head') %> 
+  <body>
+
+    <%- include('partials/header') %>
+    <h1>Listado de películas</h1>
+    
+    <ul>
+      <% peliculas.forEach(pelicula => { %>
+        <li><%- pelicula.title %> </li>
+      <% }) %>
+   </ul>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

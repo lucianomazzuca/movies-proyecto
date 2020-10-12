@@ -5,9 +5,10 @@ module.exports = {
     list: function(req, res){
         db.Movies.findAll()
         .then(function(peliculas) {
-            res.render('index', {
-                css: "index.css",
-                title: 'Bienvenido'
+            res.render('list', {
+                css: "list.css",
+                title: 'Bienvenido',
+                peliculas
             })
         })
     },
