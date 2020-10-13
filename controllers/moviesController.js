@@ -60,5 +60,20 @@ module.exports = {
     search: function(req, res){
         //probably use findOne()
         //db.Usuario.findOne({ where: { name: 'Tony}})
+        console.log(req.body.search)
+
+        db.Movies.findAll({
+            where: {
+                title: {[Op.like] : '%' + req.body.search + '%'}
+            }
+        })
+        .then(function(peliculas) {
+            res.render('list', {
+                css: 'list.css',
+                title: 'Resultado',
+                titlePage: 'Resultados de la búsqueda',
+                peliculas
+            })
+        })
     }
 }
