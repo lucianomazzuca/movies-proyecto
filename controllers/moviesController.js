@@ -16,9 +16,8 @@ module.exports = {
     },
     detail: function (req, res) {
         db.Movies.findByPk(req.params.id, {
-            include: [{association: 'genres'}]
+            include: [{association: 'genres'}, {association: 'actors'}]
         }).then(function (pelicula) {
-            console.log(pelicula);
             res.render("detail", {
                 css: "detail.css",
                 title: "Detalles",
@@ -123,5 +122,8 @@ module.exports = {
         })
 
         res.redirect('/movies');
+    },
+    genre: function(req, res) {
+
     }
 };

@@ -29,12 +29,22 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: "products",
+        tableName: "actors",
         timestamps: true,
         underscored: true
     }
 
-    const Actors = sequelize.define(alias, cols, config);
+    const Actor = sequelize.define(alias, cols, config);
 
-    return Actors;
+    Actor.associate = function(models) {
+        Actor.belongsToMany(models.Movies, {
+            as: 'movies',
+            through: 'actor_movie',
+            foreignKey: 'actor_id',
+            otherKey: 'movie_id',
+            timestamps: false
+        })
+    }
+
+    return Actor;
 }

@@ -15,9 +15,17 @@
       <p>Duracion: <%- pelicula.length%></p>
 
       <% if (pelicula.genres) { %>
-      <p>Genero: <%- pelicula.genres.name %> </p> 
+      <p>Genero: <a href="/movies/genre/<%- pelicula.genres.id %>"><%- pelicula.genres.name %></a> </p> 
       <% } %>
-        
+
+      <h3>Actores:</h3>
+      <ul>
+        <% if (pelicula.actors) { %>
+          <% pelicula.actors.forEach(actor => { %>
+            <li><a href="/movies/actor/<%- actor.id %>"><%- actor.first_name + ' ' + actor.last_name%></a></li>
+          <% }) %>
+        <% } %>
+      </ul>
       <button><a href="/movies/edit/<%- pelicula.id %> ">Editar</a></button>
 
       <form action="/movies/delete/<%= pelicula.id %>" method="POST">
