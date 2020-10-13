@@ -26,7 +26,21 @@ module.exports = {
         })
     },
     new: function(req,res){
-
+        db.Movies.findAll({
+            order: [
+                ["release_date", "DESC"]
+            ],
+            limit: 5
+        })
+        .then(function(peliculas) {
+            console.log(peliculas)
+            res.render('list', {
+                css: 'list.css',
+                title: 'Nuevos',
+                titlePage: 'Ultimas películas',
+                peliculas
+            })
+        })
     },
     recommended: function(req,res){
         db.Movies.findAll({
