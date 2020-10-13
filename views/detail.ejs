@@ -8,15 +8,15 @@
     <div class="container">
       <h2>Detalles</h2>
 
-      <% if (pelicula == null) { %>
-       <p>No tenemos esa película</p>
-      <% } %>
-    
       <p>Titulo: <%- pelicula.title%></p>
       <p>Rating: <%- pelicula.rating%></p>
       <p>Premios: <%- pelicula.awards%></p>
       <p>Fecha de estreno: <%- pelicula.release_date%></p>
       <p>Duracion: <%- pelicula.length%></p>
+
+      <% if (pelicula.genres) { %>
+      <p>Genero: <%- pelicula.genres.name %> </p> 
+      <% } %>
         
       <button><a href="/movies/edit/<%- pelicula.id %> ">Editar</a></button>
 

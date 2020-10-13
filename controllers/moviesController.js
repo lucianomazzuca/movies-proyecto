@@ -4,24 +4,30 @@ const { Op } = require("sequelize");
 
 module.exports = {
     list: function (req, res) {
-        db.Movies.findAll().then(function (peliculas) {
+        db.Movies.findAll()
+        .then(function (peliculas) {
             res.render("list", {
                 css: "list.css",
                 title: "Listado",
                 titlePage: "Listado de películas",
                 peliculas,
             });
-        });
+        })
     },
     detail: function (req, res) {
-        db.Movies.findByPk(req.params.id).then(function (pelicula) {
+        db.Movies.findByPk(req.params.id, {
+            include: [{association: 'genres'}]
+        }).then(function (pelicula) {
             console.log(pelicula);
             res.render("detail", {
                 css: "detail.css",
                 title: "Detalles",
                 pelicula,
-            });
-        });
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
     },
     new: function (req, res) {
         db.Movies.findAll({
@@ -52,10 +58,6 @@ module.exports = {
         });
     },
     search: function (req, res) {
-        //probably use findOne()
-        //db.Usuario.findOne({ where: { name: 'Tony}})
-        console.log(req.body.search);
-
         db.Movies.findAll({
             where: {
                 title: { [Op.like]: "%" + req.body.search + "%" },

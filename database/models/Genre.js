@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
 
-    let alias = "Movies";
+    let alias = "Genres";
 
     let cols = {
         id: {
@@ -24,12 +24,19 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: "products",
+        tableName: "genres",
         timestamps: true,
         underscored: true
     }
 
-    const Movies = sequelize.define(alias, cols, config);
+    const Genre = sequelize.define(alias, cols, config);
 
-    return Movies;
+    Genre.associate = function(models) {
+        Genre.hasMany(models.Movies, {
+            as: 'movies',
+            foreignKey: 'genre_id'
+        })
+    }
+
+    return Genre;
 }
