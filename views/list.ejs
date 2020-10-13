@@ -4,13 +4,17 @@
   <body>
 
     <%- include('partials/header') %>
-    <h1>Listado de películas</h1>
+
+    <div class="container">
+      <h1><%- titlePage %> </h1>
     
-    <ul>
-      <% peliculas.forEach(pelicula => { %>
-        <li><%- pelicula.title %> </li>
-      <% }) %>
-   </ul>
+      <ul>
+        <% peliculas.forEach(pelicula => { %>
+          <li><a href="/movies/detail/<%- pelicula.id%>"><%- pelicula.title %></a></li>
+        <% }) %>
+     </ul>
+  
+    </div>
 
     <%- include('partials/footer') %>
   </body>

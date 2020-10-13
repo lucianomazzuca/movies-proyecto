@@ -1,5 +1,6 @@
 const db = require('../database/models');
 const sequelize = db.sequelize;
+const { Op } = require("sequelize");
 
 module.exports = {
     list: function(req, res){
@@ -7,7 +8,8 @@ module.exports = {
         .then(function(peliculas) {
             res.render('list', {
                 css: "list.css",
-                title: 'Bienvenido',
+                title: 'Listado',
+                titlePage: 'Listado de películas',
                 peliculas
             })
         })
@@ -16,14 +18,30 @@ module.exports = {
         db.Movies.findByPk(req.params.id)
         .then(function(pelicula) {
             console.log(pelicula)
-            res.send(pelicula.title)
+            res.render('detail', {
+                css: 'detail.css',
+                title: 'Detalles',
+                pelicula
+            })
         })
     },
     new: function(req,res){
 
     },
     recommended: function(req,res){
-        res.send('recommended')
+        db.Movies.findAll({
+            where: {
+                rating: {[Op.gt] : 8}
+            }
+        })
+        .then(function(peliculas) {
+            res.render('list', {
+                css: 'list.css',
+                title: 'Recomendaciones',
+                titlePage: 'Peliculas mejor valoradas',
+                peliculas
+            })
+        })
     },
     search: function(req, res){
         //probably use findOne()
