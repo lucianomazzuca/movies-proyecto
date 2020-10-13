@@ -10,4 +10,10 @@ router.get('/recommended', moviesController.recommended);
 
 router.post('/search', moviesController.search);
 
+router.get('/create', moviesController.createForm)
+router.post('/create', moviesController.create)
+
+router.get('/edit/:id', moviesController.edit);
+router.post('/edit/:id', moviesController.update);
+
 module.exports = router;
