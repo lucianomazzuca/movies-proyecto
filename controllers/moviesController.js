@@ -122,8 +122,5 @@ module.exports = {
         })
 
         res.redirect('/movies');
-    },
-    genre: function(req, res) {
-
     }
 };
