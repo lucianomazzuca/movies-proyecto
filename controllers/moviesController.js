@@ -112,5 +112,14 @@ module.exports = {
         })
 
         res.redirect('/movies/detail/' + req.params.id);
+    },
+    delete: function(req, res) {
+        db.Movies.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        res.redirect('/movies');
     }
 };
